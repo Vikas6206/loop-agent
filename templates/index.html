@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Self-Correcting Multi-Agent System</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+  <header class="hero">
+    <h1>Self-Correcting Multi-Agent System</h1>
+    <p>Loop Engineering: Writer &rarr; Reviewer &rarr; Reviser, repeated until the answer passes review.</p>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <form id="topic-form" autocomplete="off">
+        <label for="topic">Topic or question</label>
+        <div class="input-row">
+          <input id="topic" name="topic" type="text" maxlength="300" required
+                 placeholder="e.g. What is an API?">
+          <button id="run-btn" type="submit">Run workflow</button>
+        </div>
+      </form>
+      <div id="error" class="error" role="alert" hidden></div>
+    </section>
+
+    <section class="card">
+      <h2>Workflow</h2>
+      <ol class="pipeline" id="pipeline">
+        <li data-agent="writer"><span class="num">&#9999;&#65039;</span><span>Writer</span></li>
+        <li data-agent="reviewer"><span class="num">&#128269;</span><span>Reviewer</span></li>
+        <li data-agent="reviser"><span class="num">&#128260;</span><span>Reviser</span></li>
+        <li data-agent="done"><span class="num">&#9989;</span><span>Final</span></li>
+      </ol>
+      <div id="status" class="status" aria-live="polite">Enter a topic and run the workflow.</div>
+    </section>
+
+    <section class="card" id="timeline-card" hidden>
+      <h2>Agent activity</h2>
+      <div id="timeline" class="timeline"></div>
+    </section>
+
+    <section class="card result" id="result-card" hidden>
+      <div class="result-head">
+        <h2>Final answer</h2>
+        <span id="badge" class="badge"></span>
+      </div>
+      <p id="meta" class="meta"></p>
+      <div id="final-answer" class="answer"></div>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', path='app.js') }}"></script>
+</body>
+</html>
